@@ -9,10 +9,6 @@ class weighted_sentence:
         self.index = index
         
 
-def compareByWeightDiff(x,y):
-    return y.weight-x.weight
-        
-
 #Ranking input:Matrix of similarity scores between each pair of sentences, original sentences in a list
 def page_rank(matrix, original_sentences):
     length = len(original_sentences)
@@ -32,6 +28,6 @@ def page_rank(matrix, original_sentences):
         eigenCounts.append(ws)
     
     #>>> sorted(student_objects, key=lambda student: student.age)   # sort by age
-    #eigenCounts = sorted(eigenCounts, compareByWeightDiff)
+    eigenCounts = sorted(eigenCounts, lambda x, y: int(y.weight - x.weight))
     
     return eigenCounts
