@@ -9,7 +9,7 @@ sys.path.insert(0,'../functions/')
 
 import normalize,rank,similarity
 
-#Implementation of LexRank using sumy tokenizers and parsers
+#Basic Implementation of LexRank using sumy tokenizers and parsers
 
 Language = "english"
 
@@ -73,5 +73,5 @@ def summarizeFromFile(file_path, sentence_threshold, similarityFunct, normalizeF
 
 
 
-l = summarizeFromFile('test.txt',5, similarity.tanimoto, normalize.normalizeByLength, rank.page_rank)
+l = summarizeFromFile('poly.txt',7, similarity.tanimoto, normalize.normalizeByLength, rank.page_rank)
 print l
