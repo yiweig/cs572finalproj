@@ -46,19 +46,32 @@ def summarizeFromString(text, sentence_threshold, similarityFunct, normalizeFunc
     
     matrix = buildMatrix(sentences, similarityFunct, normalizeFunct)
     ranked_sentences = rankingMethod(matrix, sentences)
-    pass
+    
+    top_sentences = []
+    
+    
+    for x in range(0,min(sentence_threshold,len(ranked_sentences))):
+        top_sentences.append(ranked_sentences[x])
+
+    top_sentences = sorted(top_sentences, lambda x, y: int(x.index - y.index))
+    
+    summary = ' '
+    for x in range(0,len(top_sentences)):
+        summary += top_sentences[x].sentence + ' '
+        
+    return summary
 
 
 def summarizeFromFile(file_path, sentence_threshold, similarityFunct, normalizeFunct, rankingMethod):
     l = ' '
     with open(file_path) as f:
         l = l.join(line.strip() for line in f)
-    summarizeFromString(l,sentence_threshold, similarityFunct, normalizeFunct, rankingMethod)
+    return  summarizeFromString(l,sentence_threshold, similarityFunct, normalizeFunct, rankingMethod)
     
 
 
 
 
 
-summarizeFromFile('test.txt',10, similarity.tanimoto, normalize.normalizeByLength, rank.page_rank)
-
+l = summarizeFromFile('test.txt',5, similarity.tanimoto, normalize.normalizeByLength, rank.page_rank)
+print l
