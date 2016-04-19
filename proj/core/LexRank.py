@@ -4,6 +4,10 @@ from sumy.nlp.stemmers import Stemmer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 import math
+import sys
+sys.path.insert(0,'../functions/')
+
+import normalize,rank,similarity
 
 #Implementation of LexRank using sumy tokenizers and parsers
 
@@ -19,21 +23,7 @@ def tokenizeToWords(text):
     tokenizer = Tokenizer(Language)
     return tokenizer.to_words(text)
 
-def tanimoto(a,b):
-    c = [v for v in a if v in b]
-    return float((len(c)) / len(a) +  len(b) - len(c))
     
-def normalizeByLength(array, length):
-    dist = 0
-    for x in range(0,length):
-        dist +=  array[x] * array[x]
-    
-    dist = math.sqrt(dist)
-    
-    for x in range(0,length):
-        array[x] = array[x] / dist
-    
-    return array
 	
 def buildMatrix(sentences, similarityFunct, normalizeFunct):
     matrix = [[0 for x in range(len(sentences))] for y in range(len(sentences))] 
@@ -70,8 +60,5 @@ def summarizeFromFile(file_path, sentence_threshold, similarityFunct, normalizeF
 
 
 
-
-
-
-summarizeFromFile('test.txt',10, tanimoto, normalizeByLength)
+summarizeFromFile('test.txt',10, similarity.tanimoto, normalize.normalizeByLength, rank.page_rank)
 

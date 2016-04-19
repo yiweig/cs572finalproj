@@ -10,7 +10,7 @@ from sumy.parsers.parser import DocumentParser
 
 
 #The built in plaintext parser takes in a format where there are headings (all uppercase) to denoted separation of paragraphs in text
-
+#Need to write this class if you want to use modify sumy
 
 
 class RawTextParser(DocumentParser):
