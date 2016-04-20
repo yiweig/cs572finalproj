@@ -1,13 +1,11 @@
 
-from sumy.nlp.stemmers import Stemmer
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
 import math
 import sys
 sys.path.insert(0,'../functions/')
+sys.path.insert(0,'../utils/')
 
 import normalize,rank,similarity
-
+import tokenize as tokenizer
 #Basic Implementation of LexRank using sumy tokenizers and parsers
 #Uses tanimoto similar measure (Jaccard) between sentences -> Page Rank
 
