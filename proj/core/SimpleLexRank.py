@@ -1,4 +1,3 @@
-import numpy as np
 
 from sumy.nlp.stemmers import Stemmer
 from sumy.parsers.plaintext import PlaintextParser
@@ -10,6 +9,7 @@ sys.path.insert(0,'../functions/')
 import normalize,rank,similarity
 
 #Basic Implementation of LexRank using sumy tokenizers and parsers
+#Uses tanimoto similar measure (Jaccard) between sentences -> Page Rank
 
 Language = "english"
 
@@ -69,9 +69,3 @@ def summarizeFromFile(file_path, sentence_threshold, similarityFunct, normalizeF
     return  summarizeFromString(l,sentence_threshold, similarityFunct, normalizeFunct, rankingMethod)
     
 
-
-
-
-
-l = summarizeFromFile('poly.txt',7, similarity.tanimoto, normalize.normalizeByLength, rank.page_rank)
-print l
